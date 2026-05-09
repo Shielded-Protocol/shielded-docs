@@ -1,0 +1,28 @@
+# How It Works
+
+Shielded Protocol brings privacy to the Stellar network using Zero-Knowledge proofs. This guide explains the core concepts that make private, compliant transactions possible.
+
+## Core Concepts
+
+### 1. What is a Commitment?
+A **commitment** is a cryptographic hash that "commits" a user to a specific value without revealing it. In Shielded Protocol, a commitment is a Poseidon hash of:
+- A random **secret** (known only to the user)
+- The **amount** being shielded
+- The **tokenId** of the asset
+
+When you deposit funds, the commitment is stored on-chain, while the balance remains hidden.
+
+### 2. Merkle Tree
+To prove that a commitment exists without revealing *which* one, we use a **Merkle Tree**. All commitments are leaves in this tree. A user can provide a "Merkle path" and a ZK proof to demonstrate that their hidden commitment is part of the valid tree root stored on-chain.
+
+### 3. Nullifier
+To prevent double-spending while maintaining privacy, we use **nullifiers**. A nullifier is derived deterministically from the commitment's secret. When you withdraw, you reveal the nullifier. The contract tracks revealed nullifiers to ensure the same commitment isn't spent twice. Crucially, the nullifier cannot be linked back to the original commitment by anyone other than the owner.
+
+### 4. Viewing Keys
+For regulatory compliance, Shielded Protocol supports **Viewing Keys**. A user can encrypt their transaction details with an auditor's public key. This "viewing key" allows designated compliance officers to decrypt and audit specific positions while keeping them private from the general public.
+
+## The Lifecycle
+
+1. **Deposit**: User sends assets to the `CommitmentPool` contract along with a commitment hash.
+2. **Transfer**: (Coming Soon) Users can transfer "notes" privately off-chain or via relayers.
+3. **Withdraw**: User generates a ZK proof off-chain demonstrating ownership of a valid commitment. They submit the proof and a nullifier to the contract, which verifies the proof and releases the funds to a fresh recipient address.

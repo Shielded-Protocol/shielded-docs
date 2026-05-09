@@ -1,0 +1,21 @@
+# Quickstart
+
+Get up and running with Shielded Protocol in minutes.
+
+## Installation
+
+```bash
+npm install @shielded/core
+```
+
+## Creating a Shielded Note
+
+```typescript
+import { createNote } from '@shielded/core';
+
+const amount = 100n * 10n**7n; // 100 XLM
+const tokenId = 0n; // XLM identifier
+
+const note = await createNote(amount, tokenId);
+console.log('Commitment:', note.commitment);
+```

@@ -1,0 +1,18 @@
+# Glossary
+
+Essential terminology for the Shielded Protocol and Zero-Knowledge cryptography.
+
+- **ZK Proof (Zero-Knowledge Proof)**: A cryptographic method by which one party (the prover) can prove to another party (the verifier) that a given statement is true, without conveying any information apart from the fact that the statement is indeed true.
+- **Groth16**: A widely used ZK-SNARK protocol known for its small proof size and fast verification time. It requires a one-time trusted setup for each circuit.
+- **Circom**: A domain-specific language for writing arithmetic circuits used in ZK proofs.
+- **BN254**: The specific elliptic curve used for pairing-based cryptography in our Groth16 implementation, compatible with Soroban's upcoming host functions.
+- **Poseidon Hash**: A ZK-friendly hash function designed to minimize the number of constraints in arithmetic circuits.
+- **Merkle Tree**: A data structure where every leaf node is a hash of a data block, and every non-leaf node is a hash of its children's hashes.
+- **Commitment**: A hash that hides a value but allows the owner to prove its inclusion in the state later.
+- **Nullifier**: A deterministic value used to invalidate a spent commitment without revealing the commitment itself.
+- **Viewing Key**: An encrypted piece of data that allows a third party (like an auditor) to view private transaction details.
+- **Trusted Setup**: A procedure that generates the initial parameters (proving/verifying keys) for a ZK circuit.
+- **Proving Key**: Data used to generate a ZK proof for a specific circuit.
+- **Verifying Key**: Data used to verify a ZK proof on-chain or off-chain.
+- **Public Signals**: Values in a ZK proof that are visible to everyone (e.g., Merkle root, nullifier).
+- **Witness**: The set of all private and public inputs that satisfy a ZK circuit's constraints.
